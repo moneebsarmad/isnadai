@@ -182,10 +182,10 @@ export default function TreePanel({
   const treeCanvas = (
     <div className="flex-1 relative overflow-hidden">
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-neutral-50 z-10">
+        <div className="absolute inset-0 flex items-center justify-center z-10" style={{ background: 'var(--ms-parchment)' }}>
           <div className="flex flex-col items-center gap-3">
-            <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-            <p className="text-xs text-neutral-400">Building isnād tree…</p>
+            <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--ms-gold)', borderTopColor: 'transparent' }} />
+            <p className="text-xs" style={{ color: 'var(--ms-ink-muted)' }}>Building isnād tree…</p>
           </div>
         </div>
       )}
@@ -203,11 +203,12 @@ export default function TreePanel({
 
       {/* Chain isolation legend */}
       {legendBooks.length > 1 && (
-        <div className="absolute bottom-4 left-4 z-20 bg-white/90 backdrop-blur-sm rounded-xl border border-neutral-200 shadow-md px-3 py-2 flex items-center gap-2 flex-wrap max-w-xs">
+        <div className="absolute bottom-4 left-4 z-20 backdrop-blur-sm rounded-xl border shadow-md px-3 py-2 flex items-center gap-2 flex-wrap max-w-xs" style={{ background: 'rgba(250,243,228,0.93)', borderColor: 'var(--ms-border)' }}>
           {activeBooks.size > 0 && (
             <button
               onClick={() => setActiveBooks(new Set())}
-              className="text-xs text-blue-600 hover:text-blue-800 font-medium mr-1 shrink-0"
+              className="text-xs font-medium mr-1 shrink-0 transition-colors"
+              style={{ color: 'var(--ms-gold)' }}
               title="Show all chains"
             >
               All
@@ -220,19 +221,15 @@ export default function TreePanel({
                 key={book.code}
                 onClick={() => toggleBook(book.code)}
                 title={book.name}
-                className={`flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs transition-all border ${
-                  active
-                    ? 'border-neutral-400 bg-neutral-100 font-medium text-neutral-800 shadow-sm'
-                    : activeBooks.size > 0
-                    ? 'border-neutral-200 bg-white text-neutral-400 opacity-50'
-                    : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-400 hover:bg-neutral-50'
-                }`}
+                className="flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs transition-all border"
+                style={active
+                  ? { borderColor: 'var(--ms-border)', background: 'var(--ms-parchment-deep)', color: 'var(--ms-ink)', fontWeight: 500 }
+                  : activeBooks.size > 0
+                  ? { borderColor: 'var(--ms-border-light)', background: 'var(--ms-parchment-card)', color: 'var(--ms-ink-muted)', opacity: 0.5 }
+                  : { borderColor: 'var(--ms-border-light)', background: 'var(--ms-parchment-card)', color: 'var(--ms-ink-mid)' }}
               >
-                <span
-                  className="w-2.5 h-2.5 rounded-full shrink-0"
-                  style={{ backgroundColor: book.color }}
-                />
-                <span className="font-[Amiri,serif]" dir="rtl">{book.name}</span>
+                <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: book.color }} />
+                <span style={{ fontFamily: "'Amiri', serif" }} dir="rtl">{book.name}</span>
               </button>
             )
           })}
@@ -241,15 +238,12 @@ export default function TreePanel({
 
       {/* Node edit panel */}
       {selectedNode && (
-        <div className="absolute bottom-4 right-4 w-72 bg-white rounded-xl border border-neutral-200 shadow-lg z-20 overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-100">
-            <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">
+        <div className="absolute bottom-4 right-4 w-72 rounded-xl border shadow-lg z-20 overflow-hidden" style={{ background: 'var(--ms-parchment-card)', borderColor: 'var(--ms-border)' }}>
+          <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: 'var(--ms-border-light)' }}>
+            <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--ms-ink-muted)' }}>
               {selectedNode.isProphet ? 'Prophet ﷺ' : selectedNode.isCompiler ? 'Compiler' : selectedNode.isUnresolved ? 'Unresolved Narrator' : 'Narrator'}
             </span>
-            <button
-              onClick={() => setSelectedNode(null)}
-              className="text-neutral-400 hover:text-neutral-600 transition-colors"
-            >
+            <button onClick={() => setSelectedNode(null)} className="transition-colors" style={{ color: 'var(--ms-ink-muted)' }}>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
               </svg>
@@ -266,19 +260,21 @@ export default function TreePanel({
                   onKeyDown={e => { if (e.key === 'Enter') handleSaveNode(); if (e.key === 'Escape') setSelectedNode(null) }}
                   dir="rtl"
                   autoFocus
-                  className="w-full px-3 py-2 text-sm border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-[Amiri,serif] text-base"
+                  className="w-full px-3 py-2 text-sm rounded-lg focus:outline-none text-base"
+                  style={{ border: '1px solid var(--ms-border)', background: 'var(--ms-parchment)', color: 'var(--ms-ink)', fontFamily: "'Amiri', serif" }}
                   placeholder="Narrator name…"
                 />
                 {selectedNode.variants.length > 0 && (
                   <div>
-                    <p className="text-xs text-neutral-400 mb-1.5">Name variants in this study</p>
+                    <p className="text-xs mb-1.5" style={{ color: 'var(--ms-ink-muted)' }}>Name variants in this study</p>
                     <div className="flex flex-wrap gap-1">
                       {selectedNode.variants.slice(0, 5).map((v, i) => (
                         <button
                           key={i}
                           onClick={() => setEditName(v)}
                           title="Use this variant"
-                          className="px-2 py-0.5 text-xs bg-neutral-100 hover:bg-blue-50 hover:text-blue-700 rounded-md text-neutral-600 transition-colors font-[Amiri,serif] cursor-pointer"
+                          className="px-2 py-0.5 text-xs rounded-md transition-colors cursor-pointer"
+                          style={{ background: 'var(--ms-parchment-deep)', color: 'var(--ms-ink-mid)', fontFamily: "'Amiri', serif" }}
                           dir="rtl"
                         >
                           {v}
@@ -289,16 +285,16 @@ export default function TreePanel({
                 )}
                 {saveError && <p className="text-xs text-red-500">{saveError}</p>}
                 <div className="flex gap-2 justify-end pt-1">
-                  <button
-                    onClick={() => setSelectedNode(null)}
-                    className="px-3 py-1.5 text-xs text-neutral-600 hover:text-neutral-800 transition-colors"
-                  >
+                  <button onClick={() => setSelectedNode(null)} className="px-3 py-1.5 text-xs transition-colors" style={{ color: 'var(--ms-ink-muted)' }}>
                     Cancel
                   </button>
                   <button
                     onClick={handleSaveNode}
                     disabled={saving || !editName.trim()}
-                    className="px-4 py-1.5 text-xs bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg font-medium transition-colors"
+                    className="px-4 py-1.5 text-xs text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+                    style={{ background: 'var(--ms-gold)' }}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'var(--ms-gold-dark)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = 'var(--ms-gold)')}
                   >
                     {saving ? 'Saving…' : 'Save'}
                   </button>
@@ -306,8 +302,8 @@ export default function TreePanel({
               </>
             ) : (
               <div className="text-center py-2">
-                <p className="text-sm font-[Amiri,serif] text-neutral-700 mb-2" dir="rtl">{selectedNode.label}</p>
-                <p className="text-xs text-neutral-400">
+                <p className="text-sm mb-2" dir="rtl" style={{ fontFamily: "'Amiri', serif", color: 'var(--ms-ink-mid)' }}>{selectedNode.label}</p>
+                <p className="text-xs" style={{ color: 'var(--ms-ink-muted)' }}>
                   {selectedNode.isProphet && 'The Prophet ﷺ is the terminal source of this chain.'}
                   {selectedNode.isCompiler && 'Compiler nodes are derived from the source book and cannot be edited here.'}
                   {selectedNode.isUnresolved && 'This narrator has not been linked yet. Use the Narrator Registry to link them.'}
@@ -343,7 +339,7 @@ export default function TreePanel({
 
   if (isFullscreen) {
     return (
-      <div className="fixed inset-0 z-50 bg-white flex flex-col">
+      <div className="fixed inset-0 z-50 flex flex-col" style={{ background: 'var(--ms-parchment)' }}>
         {controls}
         {treeCanvas}
       </div>

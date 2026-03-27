@@ -34,7 +34,7 @@ export default function RootLayout({
       dir="ltr"
       className={`${geistSans.variable} ${geistMono.variable} ${amiri.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-neutral-50 text-neutral-900">
+      <body className="min-h-full flex flex-col" style={{ background: 'var(--ms-parchment)', color: 'var(--ms-ink)' }}>
         {children}
       </body>
     </html>

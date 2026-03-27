@@ -166,8 +166,8 @@ export default function WorkbenchClient({ studyId, studyTitle }: WorkbenchClient
       {/* Left panel: Versions */}
       {!leftCollapsed && (
         <aside
-          className="bg-white border-r border-neutral-200 flex flex-col overflow-hidden shrink-0"
-          style={{ width: effectiveLeftWidth }}
+          className="flex flex-col overflow-hidden shrink-0 border-r"
+          style={{ width: effectiveLeftWidth, background: 'var(--ms-parchment-card)', borderColor: 'var(--ms-border)' }}
         >
           <VersionPanel
             studyId={studyId}
@@ -179,14 +179,15 @@ export default function WorkbenchClient({ studyId, studyTitle }: WorkbenchClient
 
       {/* Drag handle: left-center */}
       <div
-        className="w-1 bg-neutral-200 hover:bg-blue-400 cursor-col-resize shrink-0 transition-colors z-10"
+        className="w-1 cursor-col-resize shrink-0 transition-colors z-10 hover:opacity-100 opacity-60"
+        style={{ background: 'var(--ms-border)' }}
         onMouseDown={onLeftHandleMouseDown}
         onDoubleClick={onLeftHandleDblClick}
         title="Drag to resize. Double-click to collapse."
       />
 
       {/* Center panel: Isnād tree */}
-      <main className="flex flex-col overflow-hidden bg-neutral-50 flex-1 min-w-0">
+      <main className="flex flex-col overflow-hidden flex-1 min-w-0" style={{ background: 'var(--ms-parchment)' }}>
         <TreePanel
           studyId={studyId}
           studyTitle={studyTitle}
@@ -199,7 +200,8 @@ export default function WorkbenchClient({ studyId, studyTitle }: WorkbenchClient
 
       {/* Drag handle: center-right */}
       <div
-        className="w-1 bg-neutral-200 hover:bg-blue-400 cursor-col-resize shrink-0 transition-colors z-10"
+        className="w-1 cursor-col-resize shrink-0 transition-colors z-10 hover:opacity-100 opacity-60"
+        style={{ background: 'var(--ms-border)' }}
         onMouseDown={onRightHandleMouseDown}
         onDoubleClick={onRightHandleDblClick}
         title="Drag to resize. Double-click to collapse."
@@ -208,8 +210,8 @@ export default function WorkbenchClient({ studyId, studyTitle }: WorkbenchClient
       {/* Right panel: Narrators | Matan tabs */}
       {!rightCollapsed && (
         <aside
-          className="bg-white border-l border-neutral-200 flex flex-col overflow-hidden shrink-0"
-          style={{ width: effectiveRightWidth }}
+          className="flex flex-col overflow-hidden shrink-0 border-l"
+          style={{ width: effectiveRightWidth, background: 'var(--ms-parchment-card)', borderColor: 'var(--ms-border)' }}
         >
           <RightPanel studyId={studyId} refreshKey={refreshKey} />
         </aside>

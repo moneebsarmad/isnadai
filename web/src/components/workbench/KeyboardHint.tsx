@@ -12,10 +12,10 @@ const SHORTCUTS: { key: string; label: string }[] = [
 
 export default function KeyboardHint() {
   return (
-    <div className="shrink-0 flex items-center gap-3 px-4 py-1.5 bg-white border-t border-neutral-100 text-xs text-neutral-400 overflow-x-auto select-none">
+    <div className="shrink-0 flex items-center gap-3 px-4 py-1.5 border-t overflow-x-auto select-none text-xs" style={{ background: 'var(--ms-parchment-deep)', borderColor: 'var(--ms-border-light)', color: 'var(--ms-ink-muted)' }}>
       {SHORTCUTS.map(({ key, label }) => (
         <span key={key} className="flex items-center gap-1 whitespace-nowrap">
-          <kbd className="inline-flex items-center justify-center min-w-[1.4rem] h-5 px-1.5 bg-neutral-100 border border-neutral-200 rounded text-neutral-600 font-mono text-[10px] leading-none">
+          <kbd className="inline-flex items-center justify-center min-w-[1.4rem] h-5 px-1.5 rounded font-mono text-[10px] leading-none" style={{ background: 'var(--ms-parchment-card)', border: '1px solid var(--ms-border)', color: 'var(--ms-ink-mid)' }}>
             {key}
           </kbd>
           <span>{label}</span>

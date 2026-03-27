@@ -1,27 +1,31 @@
 @import "tailwindcss";
 
+/* ── Manuscript palette ──────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ms-parchment:       #F5ECD7;   /* main background */
+  --ms-parchment-card:  #FAF3E4;   /* card / panel surfaces */
+  --ms-parchment-deep:  #EDE0C8;   /* hover states / pressed */
+  --ms-border:          #C4A882;   /* primary borders */
+  --ms-border-light:    #DDD0B8;   /* subtle dividers */
+  --ms-ink:             #2C1A0E;   /* primary text */
+  --ms-ink-mid:         #5C3D2A;   /* secondary text */
+  --ms-ink-muted:       #8C6E56;   /* tertiary / placeholder */
+  --ms-gold:            #C9A84C;   /* accent / CTAs */
+  --ms-gold-dark:       #A8832A;   /* gold hover */
+  --ms-gold-light:      #F5E9C0;   /* gold tint bg */
+  --ms-nav:             #2C1A0E;   /* nav bar bg */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--ms-parchment);
+  --color-foreground: var(--ms-ink);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--ms-parchment);
+  color: var(--ms-ink);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -29,5 +33,19 @@ body {
   font-family: 'Amiri', 'Scheherazade New', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
   direction: rtl;
   unicode-bidi: embed;
-  line-height: 1.8;
+  line-height: 1.9;
+}
+
+/* Manuscript card — thin ruled double-border effect */
+.ms-card {
+  background: var(--ms-parchment-card);
+  border: 1px solid var(--ms-border);
+  outline: 1px solid var(--ms-border-light);
+  outline-offset: 2px;
+}
+
+/* Scrollbar tinting */
+* {
+  scrollbar-color: var(--ms-border) var(--ms-parchment-deep);
+  scrollbar-width: thin;
 }

@@ -74,7 +74,8 @@ export const IsnadTree = forwardRef<IsnadTreeRef, IsnadTreeProps>(function Isnad
       svg.append('text')
         .attr('x', '50%').attr('y', '50%')
         .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
-        .attr('fill', '#9CA3AF').attr('font-size', '14px')
+        .attr('fill', '#8C6E56').attr('font-size', '14px')
+        .attr('font-family', "'Amiri', serif")
         .text('Add versions to see the isnād tree')
       return
     }
@@ -198,22 +199,22 @@ export const IsnadTree = forwardRef<IsnadTreeRef, IsnadTreeProps>(function Isnad
     nodeGroups.append('rect')
       .attr('width', d => d.width)
       .attr('height', d => d.height)
-      .attr('rx', 8)
+      .attr('rx', 6)
       .attr('fill', d => {
-        if (d.isProphet) return '#FEF3C7'      // amber-100 — Prophet ﷺ
-        if (d.isCompiler) return '#EFF6FF'     // blue-50 — compiler
-        if (d.isUnresolved) return '#F9FAFB'   // gray-50 — unresolved
-        return '#FFFFFF'
+        if (d.isProphet) return '#F5E9C0'      // gold-tint — Prophet ﷺ
+        if (d.isCompiler) return '#EDE0C8'     // parchment-deep — compiler
+        if (d.isUnresolved) return '#F5ECD7'   // parchment — unresolved
+        return '#FAF3E4'                        // parchment-card — narrator
       })
       .attr('stroke', d => {
-        if (d.isProphet) return '#D97706'      // amber-600
-        if (d.isCompiler) return '#2563EB'     // blue-600
-        if (d.isUnresolved) return '#9CA3AF'   // gray-400
-        return '#374151'
+        if (d.isProphet) return '#C9A84C'      // manuscript gold
+        if (d.isCompiler) return '#8C6E56'     // ink-muted
+        if (d.isUnresolved) return '#C4A882'   // ms-border, dashed
+        return '#5C3D2A'                        // ink-mid
       })
       .attr('stroke-dasharray', d => d.isUnresolved ? '5,5' : 'none')
       .attr('stroke-width', d => d.isProphet ? 2 : 1.5)
-      .attr('filter', 'drop-shadow(0 1px 2px rgb(0 0 0 / 0.08))')
+      .attr('filter', 'drop-shadow(0 1px 3px rgb(44 26 14 / 0.12))')
 
     nodeGroups.append('text')
       .attr('x', d => d.width / 2)
@@ -224,7 +225,7 @@ export const IsnadTree = forwardRef<IsnadTreeRef, IsnadTreeProps>(function Isnad
       .attr('font-family', "'Amiri', serif")
       .attr('font-size', d => d.isProphet ? '15px' : '14px')
       .attr('font-weight', d => d.isProphet ? '700' : '400')
-      .attr('fill', d => d.isProphet ? '#92400E' : d.isCompiler ? '#1D4ED8' : '#111827')
+      .attr('fill', d => d.isProphet ? '#7A4A0A' : d.isCompiler ? '#5C3D2A' : '#2C1A0E')
       .text(d => d.label)
 
     // ── Drag behaviour ─────────────────────────────────────────────────────────
@@ -306,8 +307,8 @@ export const IsnadTree = forwardRef<IsnadTreeRef, IsnadTreeProps>(function Isnad
       d3.select(this)
         .attr('stroke-width', isSelected ? 2.5 : (d.isProphet ? 2 : 1.5))
         .attr('filter', isSelected
-          ? 'drop-shadow(0 0 6px rgb(59 130 246 / 0.6))'
-          : 'drop-shadow(0 1px 2px rgb(0 0 0 / 0.08))')
+          ? 'drop-shadow(0 0 7px rgb(201 168 76 / 0.7))'
+          : 'drop-shadow(0 1px 3px rgb(44 26 14 / 0.12))')
     })
   }, [selectedNodeId])
 

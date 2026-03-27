@@ -17,25 +17,27 @@ export default function RightPanel({ studyId, refreshKey = 0 }: Props) {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Tab header */}
-      <div className="shrink-0 border-b border-neutral-200 bg-neutral-50">
+      <div className="shrink-0 border-b" style={{ borderColor: 'var(--ms-border)', background: 'var(--ms-parchment-deep)' }}>
         <div className="flex">
           <button
             onClick={() => setActiveTab('narrators')}
-            className={`flex-1 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors border-b-2 ${
-              activeTab === 'narrators'
-                ? 'text-blue-600 border-blue-600 bg-white'
-                : 'text-neutral-500 border-transparent hover:text-neutral-700 hover:bg-neutral-100'
-            }`}
+            className="flex-1 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors border-b-2"
+            style={{
+              color: activeTab === 'narrators' ? 'var(--ms-gold)' : 'var(--ms-ink-muted)',
+              borderColor: activeTab === 'narrators' ? 'var(--ms-gold)' : 'transparent',
+              background: activeTab === 'narrators' ? 'var(--ms-parchment-card)' : 'transparent',
+            }}
           >
             Narrators
           </button>
           <button
             onClick={() => setActiveTab('matan')}
-            className={`flex-1 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors border-b-2 ${
-              activeTab === 'matan'
-                ? 'text-blue-600 border-blue-600 bg-white'
-                : 'text-neutral-500 border-transparent hover:text-neutral-700 hover:bg-neutral-100'
-            }`}
+            className="flex-1 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors border-b-2"
+            style={{
+              color: activeTab === 'matan' ? 'var(--ms-gold)' : 'var(--ms-ink-muted)',
+              borderColor: activeTab === 'matan' ? 'var(--ms-gold)' : 'transparent',
+              background: activeTab === 'matan' ? 'var(--ms-parchment-card)' : 'transparent',
+            }}
           >
             Matan
           </button>
