@@ -177,13 +177,13 @@ function fallbackBoundary(
   }
 
   return {
-    isnadText: '',
-    matanText: text,
+    isnadText: text,
+    matanText: '',
     boundaryType: 'none',
     confidence: 0.3,
     introPhrase: null,
     narrativeText: null,
     postMatanCommentary: null,
-    warning: 'Could not detect isnad/matan boundary.',
+    warning: 'Could not detect isnad/matan boundary. Full text preserved as isnad for narrator extraction.',
   }
 }
