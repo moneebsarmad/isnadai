@@ -262,9 +262,8 @@ function VersionCard({
           {matnPreview && (
             <p
               className="text-xs mt-1.5 leading-relaxed line-clamp-2"
-              style={{ color: 'var(--ms-ink-muted)' }}
+              style={{ color: 'var(--ms-ink-muted)', fontFamily: "'Amiri', serif", lineHeight: '1.7' }}
               dir="rtl"
-              style={{ fontFamily: "'Amiri', serif", lineHeight: '1.7' }}
             >
               {matnPreview}
             </p>
