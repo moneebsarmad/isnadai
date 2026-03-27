@@ -65,6 +65,44 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Scholar quote */}
+      <section className="max-w-2xl mx-auto px-6 py-10">
+        <div
+          className="rounded-2xl border px-8 py-7 text-center"
+          style={{ background: 'var(--ms-parchment-card)', borderColor: 'var(--ms-border)', boxShadow: '0 1px 4px rgba(44,26,14,0.08)' }}
+        >
+          {/* decorative rule */}
+          <div className="flex items-center gap-3 mb-5 justify-center">
+            <span className="flex-1 h-px max-w-[60px]" style={{ background: 'var(--ms-gold)' }} />
+            <span className="text-lg" style={{ color: 'var(--ms-gold)' }}>✦</span>
+            <span className="flex-1 h-px max-w-[60px]" style={{ background: 'var(--ms-gold)' }} />
+          </div>
+
+          <p
+            className="text-2xl leading-[2.2] mb-4"
+            dir="rtl"
+            style={{ fontFamily: "'Amiri', serif", color: 'var(--ms-ink)' }}
+          >
+            إِنَّ مِنْ زِينَةِ الدُّنْيَا أَنْ يَقُولَ الرَّجُلُ حَدَّثَنَا مَالِكٌ
+          </p>
+
+          <p
+            className="text-sm"
+            dir="rtl"
+            style={{ fontFamily: "'Amiri', serif", color: 'var(--ms-ink-muted)' }}
+          >
+            — قَالَ بِشْرٌ الْحَافِي
+          </p>
+
+          {/* decorative rule */}
+          <div className="flex items-center gap-3 mt-5 justify-center">
+            <span className="flex-1 h-px max-w-[60px]" style={{ background: 'var(--ms-border-light)' }} />
+            <span className="text-xs" style={{ color: 'var(--ms-border)' }}>✦</span>
+            <span className="flex-1 h-px max-w-[60px]" style={{ background: 'var(--ms-border-light)' }} />
+          </div>
+        </div>
+      </section>
+
       {/* Features */}
       <section className="max-w-5xl mx-auto px-6 py-16">
         <h2 className="text-2xl font-bold text-center mb-10" style={{ color: 'var(--ms-ink)' }}>
