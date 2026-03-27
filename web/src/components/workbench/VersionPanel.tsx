@@ -237,9 +237,8 @@ function VersionCard({
           {/* Book name */}
           <div
             className="text-sm font-medium truncate"
-            style={{ color: 'var(--ms-ink)' }}
+            style={{ color: 'var(--ms-ink)', fontFamily: "'Amiri', serif" }}
             dir="rtl"
-            style={{ fontFamily: "'Amiri', serif" }}
           >
             {version.source_book}
             {version.source_reference && (
