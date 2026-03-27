@@ -22,14 +22,14 @@ export default async function HomePage() {
       </header>
 
       {/* Hero */}
-      <section className="max-w-4xl mx-auto px-6 py-24 text-center">
-        <h1 className="text-6xl font-bold tracking-tight mb-4" style={{ fontFamily: "'Amiri', serif", color: 'var(--ms-ink)' }}>
+      <section className="max-w-4xl mx-auto px-6 pt-10 pb-6 text-center">
+        <h1 className="text-6xl font-bold tracking-tight mb-3" style={{ fontFamily: "'Amiri', serif", color: 'var(--ms-ink)' }}>
           إسناد.ai
         </h1>
-        <p className="text-2xl font-medium mb-6" style={{ color: 'var(--ms-ink-mid)' }}>
+        <p className="text-2xl font-medium mb-4" style={{ color: 'var(--ms-ink-mid)' }}>
           Visual Ḥadīth Research Workbench
         </p>
-        <p className="text-lg max-w-xl mx-auto mb-10 leading-relaxed" style={{ color: 'var(--ms-ink-muted)' }}>
+        <p className="text-base max-w-xl mx-auto mb-6 leading-relaxed" style={{ color: 'var(--ms-ink-muted)' }}>
           Parse, compare, and visualize chains of transmission across multiple riwāyāt.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -37,7 +37,6 @@ export default async function HomePage() {
             href="/auth/login"
             className="inline-flex items-center gap-2 px-6 py-3 text-white font-semibold rounded-xl text-base transition-colors shadow-sm"
             style={{ background: 'var(--ms-gold)' }}
-            onMouseEnter={undefined}
           >
             Get Started — Free
           </Link>
@@ -49,24 +48,10 @@ export default async function HomePage() {
             Sign in →
           </Link>
         </div>
-
-        {/* Arabic sample */}
-        <div
-          className="mt-14 mx-auto max-w-2xl rounded-2xl border px-6 py-5"
-          style={{ background: 'var(--ms-parchment-card)', borderColor: 'var(--ms-border)', boxShadow: '0 1px 4px rgba(44,26,14,0.08)' }}
-          dir="rtl"
-        >
-          <p
-            className="text-xl leading-loose"
-            style={{ fontFamily: 'var(--font-amiri), Amiri, serif', color: 'var(--ms-ink-mid)' }}
-          >
-            حَدَّثَنَا عَبْدُ اللَّهِ بْنُ يُوسُفَ، قَالَ: أَخْبَرَنَا مَالِكٌ، عَنِ ابْنِ شِهَابٍ، عَنْ مُحَمَّدِ بْنِ جُبَيْرِ بْنِ مُطْعِمٍ
-          </p>
-        </div>
       </section>
 
       {/* Scholar quote */}
-      <section className="max-w-2xl mx-auto px-6 py-10">
+      <section className="max-w-2xl mx-auto px-6 py-6">
         <div
           className="rounded-2xl border px-8 py-7 text-center"
           style={{ background: 'var(--ms-parchment-card)', borderColor: 'var(--ms-border)', boxShadow: '0 1px 4px rgba(44,26,14,0.08)' }}
