@@ -76,6 +76,26 @@ export async function buildDAG(studyId: string, supabase: ReturnType<typeof crea
     byVersion.get(vid)!.push(m)
   }
 
+  // 4a. Build a normalized-name → resolved_key lookup so that unresolved mentions
+  //     with the same normalized name as a resolved one collapse onto the same node.
+  const nameToResolvedKey = new Map<string, string>()
+  for (const m of mentions) {
+    if (m.resolved_narrator_key && m.narrator_name_normalized) {
+      nameToResolvedKey.set(m.narrator_name_normalized, m.resolved_narrator_key)
+    }
+  }
+
+  // Helper: stable node ID — resolved key > name-matched resolved key > normalized name fallback
+  function nodeIdFor(m: typeof mentions[number]): string {
+    if (m.resolved_narrator_key) return m.resolved_narrator_key
+    if (m.narrator_name_normalized) {
+      const matched = nameToResolvedKey.get(m.narrator_name_normalized)
+      if (matched) return matched
+      return `unresolved_norm_${m.narrator_name_normalized}`
+    }
+    return `unresolved_${m.id}`
+  }
+
   // 4. Build nodes and edges
   const nodeMap = new Map<string, TreeNode>()
   const edgeMap = new Map<string, TreeEdge>()
@@ -88,10 +108,7 @@ export async function buildDAG(studyId: string, supabase: ReturnType<typeof crea
 
     for (let i = 0; i < sorted.length; i++) {
       const mention = sorted[i]
-      // Merge by resolved key if available; fall back to normalized name so that
-      // unresolved narrators with the same name still collapse into one node.
-      const nodeId = mention.resolved_narrator_key
-        ?? (mention.narrator_name_normalized ? `unresolved_norm_${mention.narrator_name_normalized}` : `unresolved_${mention.id}`)
+      const nodeId = nodeIdFor(mention)
 
       if (!nodeMap.has(nodeId)) {
         const isProphet = mention.resolved_narrator_key === '__prophet__'
@@ -117,8 +134,7 @@ export async function buildDAG(studyId: string, supabase: ReturnType<typeof crea
       // Create edge to next narrator in chain
       if (i + 1 < sorted.length) {
         const nextMention = sorted[i + 1]
-        const nextNodeId = nextMention.resolved_narrator_key
-          ?? (nextMention.narrator_name_normalized ? `unresolved_norm_${nextMention.narrator_name_normalized}` : `unresolved_${nextMention.id}`)
+        const nextNodeId = nodeIdFor(nextMention)
         const edgeId = `${nodeId}__${nextNodeId}`
 
         if (!edgeMap.has(edgeId)) {
@@ -154,8 +170,7 @@ export async function buildDAG(studyId: string, supabase: ReturnType<typeof crea
 
     const sorted = [...chain].sort((a, b) => a.position - b.position)
     const firstMention = sorted[0]
-    const firstNodeId = firstMention.resolved_narrator_key
-      ?? (firstMention.narrator_name_normalized ? `unresolved_norm_${firstMention.narrator_name_normalized}` : `unresolved_${firstMention.id}`)
+    const firstNodeId = nodeIdFor(firstMention)
 
     const compilerNodeId = `__compiler__${bookCode}`
     if (!nodeMap.has(compilerNodeId)) {
